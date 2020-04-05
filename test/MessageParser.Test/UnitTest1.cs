@@ -11,4 +11,13 @@ namespace MessageParser.Test
 
         }
     }
+
+    public class SimpleTest
+    {
+        [Fact]
+        public void Parse()
+        {
+
+        }
+    }
 }
