@@ -22,12 +22,20 @@ namespace MemoryConsole
             WriteMe(new ReadOnlySequence<byte>(data), writer);
             //await writer.WriteAsync(data);
 
-
+            Console.WriteLine("Finished writing");
             var reader = pipe.Reader;
 
             var result = await reader.ReadAsync();
 
             var rq = result.Buffer;
+
+            foreach(var item in rq)
+            {
+                var readResult = Encoding.UTF8.GetString(item.Span);
+                Console.WriteLine(readResult);
+            }
+            //convert back
+
 
         }
 
