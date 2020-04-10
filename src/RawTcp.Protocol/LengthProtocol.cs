@@ -29,7 +29,7 @@ namespace RawTcp.Protocol
 
             //https://github.com/grpc/grpc-dotnet/blob/6504c26be7ff763f6367daf1a43b8c01eefc3e7a/src/Grpc.AspNetCore.Server/Internal/PipeExtensions.cs#L158-L184
             int length = 0;
-            if (input.Length >= HeaderSize)
+            if (input.First.Length >= HeaderSize)
             {
                 var header = input.First.Span.Slice(0, HeaderSize);
                 length = BinaryPrimitives.ReadInt32BigEndian(header);
@@ -39,6 +39,13 @@ namespace RawTcp.Protocol
                 Span<byte> header = stackalloc byte[HeaderSize];
                 input.Slice(0, HeaderSize).CopyTo(header);
                 length = BinaryPrimitives.ReadInt32BigEndian(header);
+            }
+
+            //check here if we have enough to read the message otherwise try and read more data
+            if (input.Length < HeaderSize + length)
+            {
+                message = default;
+                return false;
             }
 
             var t = input.Slice(HeaderSize, length);

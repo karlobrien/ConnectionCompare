@@ -14,34 +14,70 @@ namespace MemoryConsole
 
         static async Task Main(string[] args)
         {
+            
             Console.WriteLine("Server!");
 
-            LengthProtocol pl = new LengthProtocol();
-            var data = Encoding.UTF8.GetBytes("Hello World");
-            Console.WriteLine(data.Length);
             var options = new PipeOptions(useSynchronizationContext: false);
-
+            LengthProtocol lp = new LengthProtocol();
             var pipe = new Pipe(options);
 
             var writer = pipe.Writer;
-
-            pl.WriteMessage(new Message(data), writer);
-
-            await writer.FlushAsync();
-
             var reader = pipe.Reader;
+            _ = ReadPipeAsync(reader, lp);
 
-            var result = await reader.ReadAsync();
-            var rq = result.Buffer;
 
-            SequencePosition consumed = rq.Start;
-            SequencePosition examined = rq.Start;
-            if (pl.TryParseMessage(rq, ref consumed, ref examined, out var msg))
+            for (int i = 0; i < 100; i++)
             {
-                var readResult = Encoding.UTF8.GetString(msg.Payload.ToArray());
-                Console.WriteLine(readResult);
+                Console.WriteLine($"Writer: {i}");
+                await WritePipeAsync(writer, lp, i);
+                await Task.Delay(TimeSpan.FromSeconds(5));
             }
 
+            writer.Complete();
+
+        }
+
+        private static async Task WritePipeAsync(PipeWriter writer, IMessageProtocol messageProtocol, int i)
+        {
+            var msg = $"Message Number: {i}";
+            var data = Encoding.UTF8.GetBytes(msg);
+
+            messageProtocol.WriteMessage(new Message(data), writer);
+            await writer.FlushAsync();
+        }
+
+        private static async Task ReadPipeAsync(PipeReader reader, IMessageProtocol messageProtocol)
+        {
+            Console.WriteLine("Starting to read pipe");
+
+            while (true)
+            {
+                var result = await reader.ReadAsync();
+                var rq = result.Buffer;
+
+                SequencePosition consumed = rq.Start;
+                SequencePosition examined = rq.Start;
+                if (messageProtocol.TryParseMessage(rq, ref consumed, ref examined, out var msg))
+                {
+                    ProcessMessage(msg);
+                }
+                //would imagine you set the consumed here and try again
+
+                if (result.IsCompleted)
+                {
+                    break;
+                }
+
+                //TODO: Investigate how to use examine
+                //need to advance#
+                reader.AdvanceTo(consumed);
+            }
+        }
+
+        private static void ProcessMessage(Message msg)
+        {
+            var readResult = Encoding.UTF8.GetString(msg.Payload.ToArray());
+            Console.WriteLine(readResult);
         }
 
 
