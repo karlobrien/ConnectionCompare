@@ -26,6 +26,11 @@ namespace RawTcp.Server
             }
         }
 
+        public static async Task ReadPipeASync(PipeReader pipe)
+        {
+
+            await Task.CompletedTask;
+        }
         private static async Task ProcessLinesAsync(Socket socket)
         {
             Console.WriteLine($"[{socket.RemoteEndPoint}]: connected");
