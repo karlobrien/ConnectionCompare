@@ -38,8 +38,7 @@ namespace MemoryConsole
 
         private static async Task WritePipeAsync(PipeWriter writer, IMessageProtocol messageProtocol, int i)
         {
-            var 
-                msg = $"Message Number: {i}";
+            var msg = $"Message Number: {i}";
             var data = Encoding.UTF8.GetBytes(msg);
 
             messageProtocol.WriteMessage(new Message(data), writer);
