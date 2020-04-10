@@ -48,7 +48,9 @@ namespace RawTcp.Protocol
                 return false;
             }
 
+            //could have used input.slice(HeaderSize + length) here
             var t = input.Slice(HeaderSize, length);
+            //TODO: Do we go from a pool of preallocated messages here?
             message = new Message(t);
 
             consumed = t.End;

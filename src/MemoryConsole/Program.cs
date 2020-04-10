@@ -13,8 +13,7 @@ namespace MemoryConsole
         public const int HeaderSize = 4;
 
         static async Task Main(string[] args)
-        {
-            
+        {        
             Console.WriteLine("Server!");
 
             var options = new PipeOptions(useSynchronizationContext: false);
@@ -30,7 +29,7 @@ namespace MemoryConsole
             {
                 Console.WriteLine($"Writer: {i}");
                 await WritePipeAsync(writer, lp, i);
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                await Task.Delay(TimeSpan.FromMilliseconds(500));
             }
 
             writer.Complete();
@@ -39,7 +38,8 @@ namespace MemoryConsole
 
         private static async Task WritePipeAsync(PipeWriter writer, IMessageProtocol messageProtocol, int i)
         {
-            var msg = $"Message Number: {i}";
+            var 
+                msg = $"Message Number: {i}";
             var data = Encoding.UTF8.GetBytes(msg);
 
             messageProtocol.WriteMessage(new Message(data), writer);
@@ -61,7 +61,6 @@ namespace MemoryConsole
                 {
                     ProcessMessage(msg);
                 }
-                //would imagine you set the consumed here and try again
 
                 if (result.IsCompleted)
                 {
