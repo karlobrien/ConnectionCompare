@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net.Sockets;
 using System.Threading.Tasks;
 
@@ -14,11 +12,9 @@ namespace RawTcp.Server
         public SocketReceiver(Socket socket)
         {
             _socket = socket;
-
             _eventArgs.UserToken = "Karl";
             _eventArgs.Completed += (_, e) => { Console.WriteLine($""); };
         }
-
 
         public Task ReceiveAsync(Memory<byte> buffer)
         {

@@ -12,21 +12,21 @@ namespace RawTcp.Server
     {
         static async Task Main(string[] args)
         {
-            var listenSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+            SocketListener sl = new SocketListener();
+            sl.Start();
 
-            await listenSocket.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 8087));
 
-            listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 8087));
+            Console.ReadLine();
+            //var listenSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+            //listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 8087));
+            //Console.WriteLine("Listening on port 8087");
+            //listenSocket.Listen(120);
 
-            Console.WriteLine("Listening on port 8087");
-
-            listenSocket.Listen(120);
-
-            while (true)
-            {
-                var socket = await listenSocket.AcceptAsync();
-                _ = ProcessLinesAsync(socket);
-            }
+            //while (true)
+            //{
+            //    var socket = await listenSocket.AcceptAsync();
+            //    _ = ProcessLinesAsync(socket);
+            //}
         }
 
         public static async Task ReadPipeASync(PipeReader pipe)

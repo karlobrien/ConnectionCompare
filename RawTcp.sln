@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MessageParser.Test", "test\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemoryConsole", "src\MemoryConsole\MemoryConsole.csproj", "{131124AE-AFD2-4762-94DB-9FD87DAACB5A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawTcp.Protocol", "src\RawTcp.Protocol\RawTcp.Protocol.csproj", "{1F1DACCB-D0D7-41D8-B8B3-64D36326062A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RawTcp.Protocol", "src\RawTcp.Protocol\RawTcp.Protocol.csproj", "{1F1DACCB-D0D7-41D8-B8B3-64D36326062A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawTcp.PreallocServer", "src\RawTcp.PreallocServer\RawTcp.PreallocServer.csproj", "{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,18 @@ Global
 		{1F1DACCB-D0D7-41D8-B8B3-64D36326062A}.Release|x64.Build.0 = Release|Any CPU
 		{1F1DACCB-D0D7-41D8-B8B3-64D36326062A}.Release|x86.ActiveCfg = Release|Any CPU
 		{1F1DACCB-D0D7-41D8-B8B3-64D36326062A}.Release|x86.Build.0 = Release|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Debug|x64.Build.0 = Debug|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Debug|x86.Build.0 = Debug|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Release|x64.ActiveCfg = Release|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Release|x64.Build.0 = Release|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Release|x86.ActiveCfg = Release|Any CPU
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -97,6 +111,7 @@ Global
 		{0772EF9E-15E8-4363-859E-7F8D765186D8} = {15C6F415-19A3-4815-BFB4-11B43AFAC64F}
 		{131124AE-AFD2-4762-94DB-9FD87DAACB5A} = {2F8D2FDA-BD8B-41E8-A46B-7B20FB17C642}
 		{1F1DACCB-D0D7-41D8-B8B3-64D36326062A} = {2F8D2FDA-BD8B-41E8-A46B-7B20FB17C642}
+		{776781A0-9EF1-41EF-A4EC-4ABE806EE49C} = {2F8D2FDA-BD8B-41E8-A46B-7B20FB17C642}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D7BC0D67-0030-48AF-9383-1AE5E7C86AC6}
