@@ -8,11 +8,14 @@ using System.Threading.Tasks;
 
 namespace RawTcp.Server
 {
-    class Program
+    public class Program
     {
         static async Task Main(string[] args)
         {
             var listenSocket = new Socket(SocketType.Stream, ProtocolType.Tcp);
+
+            await listenSocket.ConnectAsync(new IPEndPoint(IPAddress.Loopback, 8087));
+
             listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 8087));
 
             Console.WriteLine("Listening on port 8087");
@@ -28,9 +31,9 @@ namespace RawTcp.Server
 
         public static async Task ReadPipeASync(PipeReader pipe)
         {
-
             await Task.CompletedTask;
         }
+
         private static async Task ProcessLinesAsync(Socket socket)
         {
             Console.WriteLine($"[{socket.RemoteEndPoint}]: connected");
